@@ -1,12 +1,11 @@
 // src/pages/Dashboard.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -96,25 +95,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   return (
     <div>
-      <nav className="navbar">
-        <h1>Student Management System</h1>
-        <div className="user-info">
-          <span>{user?.name}</span>
-          <span className={`role-badge role-${user?.role}`}>
-            {user?.role?.toUpperCase()}
-          </span>
-          <button className="btn-logout" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="dashboard-container">
         <div className="dashboard-header">
